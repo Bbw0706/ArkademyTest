@@ -1,0 +1,3 @@
+rootProject.name = 'Outstagram'
+
+include ':app'
