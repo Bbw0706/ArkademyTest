@@ -15,9 +15,28 @@ const postCart = (detail, qty) => {
 	}
 } 
 
+const updateQtyPlus = (id, qty) => {
+	return {
+		type : "UPDATE_QTY_PLUS",
+		payload : {
+			data : {id, qty},
+		}
+	}
+} 
+
+const updateQtyMin = (id, qty) => {
+	return {
+		type : "UPDATE_QTY_MIN",
+		payload : {
+			data : {id, qty},
+		}
+	}
+} 
+
+
 const deleteCart = (id) => {
 	return {
-		type : "DELETE_POST",
+		type : "DELETE_CART",
 		payload : id
 	}
 } 
@@ -26,5 +45,7 @@ const deleteCart = (id) => {
 export {
 	getCart,
 	postCart,
-	deleteCart
+	deleteCart,
+	updateQtyPlus,
+	updateQtyMin
 }

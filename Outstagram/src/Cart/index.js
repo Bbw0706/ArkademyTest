@@ -38,7 +38,8 @@ class Cart extends Component{
     
     let priceTotal = null;
     cardList.map((item) => {
-      return priceTotal += item.data.price
+      let subTotal = item.data.price * item.data.qty
+      return priceTotal += subTotal
     })
     
     return (

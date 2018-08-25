@@ -1,12 +1,42 @@
 import React, { Component } from 'react';
 import {View, Alert} from "react-native";
 import { ListItem, Thumbnail, Text, Left, Body, Right, Button } from 'native-base';
-import {deleteCart} from "../../store/actions/cart.js"
+import {updateQtyPlus, updateQtyMin, deleteCart} from "../../store/actions/cart.js"
 import { connect } from "react-redux"
 
 class ListCart extends Component {
+  minQty(id, qty){
+    return this.props.dispatch(updateQtyMin(id, qty))
+  }
+
+  plusQty(id, qty){
+    return this.props.dispatch(updateQtyPlus(id, qty))
+  }
+
   render(){
     const {data, navigation} = this.props
+    let buttMin = (
+      <Button 
+        small
+        danger 
+        style={{backgroundColor:"#ff0066"}}
+        onPress={() => this.minQty(data._id, data.qty)}
+      >
+          <Text>-</Text>
+      </Button>
+    )
+
+    if(data.qty <= 1) {
+      buttMin = (
+          <Button 
+          small
+          danger 
+          disabled
+        >
+            <Text>-</Text>
+        </Button>
+      )
+    }
     return(
     <View>
       <ListItem 
@@ -23,13 +53,7 @@ class ListCart extends Component {
         </Body>
         <Right>
           <View style={{flexDirection:"row"}}>
-            <Button 
-              small
-              danger 
-              style={{backgroundColor:"#ff0066"}}
-            >
-                <Text>-</Text>
-            </Button>
+            {buttMin}
 
             <Text style={{marginLeft:10, marginRight:10}}>{data.qty}</Text>
 
@@ -37,6 +61,7 @@ class ListCart extends Component {
               small 
               danger 
               style={{backgroundColor:"#ff0066"}}
+              onPress={() => this.plusQty(data._id, data.qty)}
             >
                 <Text>+</Text>
             </Button>
