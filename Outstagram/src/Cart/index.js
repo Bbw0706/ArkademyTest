@@ -20,7 +20,7 @@ class Cart extends Component{
     headerTitleStyle: {
         fontWeight: 'bold',
         color : "#fff",
-        left : 137
+        left : 145
       },
   };
 
