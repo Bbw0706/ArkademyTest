@@ -51,6 +51,7 @@ const CartStack = createStackNavigator(
 		  headerTintColor: '#fff',
 		  headerTitleStyle: {
 		    fontWeight: 'bold',
+		    color : "#fff"
 		  },
 		},
 	}

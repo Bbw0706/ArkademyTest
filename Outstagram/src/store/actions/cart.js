@@ -15,7 +15,16 @@ const postCart = (detail, qty) => {
 	}
 } 
 
+const deleteCart = (id) => {
+	return {
+		type : "DELETE_POST",
+		payload : id
+	}
+} 
+
+
 export {
 	getCart,
-	postCart
+	postCart,
+	deleteCart
 }

@@ -31,6 +31,12 @@ const cart = (state = initialState, action) => {
 				cardList : state.cardList.concat(action.payload),
 			}
 
+		case `DELETE_POST` : 
+			return {
+				...state,
+				cardList : state.cardList.filter((item, index) => item.data._id != action.payload),
+			}
+
 		default :
 			return state;
 	}

@@ -12,34 +12,50 @@ import {
 } from "native-base"
 
 import ListCart from "./component/list-cart.js"
+import Footers from "./component/footers.js"
 
 class Cart extends Component{
+  static navigationOptions = {
+    title: "Cart",
+    headerTitleStyle: {
+        fontWeight: 'bold',
+        color : "#fff",
+        left : 137
+      },
+  };
+
   render() {
     const {cardList, loading} = this.props.cart
-    
+    console.log(cardList)
     let ListProducts = null;
     if(loading){
       return ListProducts = <Spinner color="#ff0066"/>
     }
 
     if(cardList.length < 1) {
-      return ListProducts = <Text>Belanja terlebih dahulu</Text>
+      return ListProducts = <Text style={{alignSelf:"center", marginTop:30}}>Belanja terlebih dahulu</Text>
     }
-
+    
+    let priceTotal = null;
+    cardList.map((item) => {
+      return priceTotal += item.data.price
+    })
+    
     return (
       <Container>
         <Content>
           {ListProducts}
-
-          <List style={{marginRight:25}}>
+      
+          <List>
             <FlatList
               data={cardList}
               renderItem={({item}) => <ListCart data={item.data}/>}
               keyExtractor={(item, index) => item.data._id}
             />
           </List>
-    
+          
         </Content>
+        <Footers price={priceTotal}/>
       </Container>
     );
   }

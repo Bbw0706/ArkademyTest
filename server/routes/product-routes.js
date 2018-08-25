@@ -11,17 +11,18 @@ router.post("/", (req,res) => {
 	.then(data => res.send(data))
 })
 
-router.get("/:id", (req,res) => {
-	const {id} = req.params
-	Product.findById(id)
-	.then(data => res.send(data))
+router.put('/:id', (req,res) => {
+	const id = req.params.id;
+	const {title, price, image, description} = req.body
+
+	Product.findByIdAndUpdate(id, {$set : {title, price, image, description}})
+	.then(data => {
+		Product.find({})
+		.then(data => res.send(data))
+	})
 })
 
-// router.put("/:id", (req,res) => {
-// 	Product.findByIdAndUpdate()
-// })
-
-router.delete("/", (req,res) => {
+router.delete("/:id", (req,res) => {
 	const {id} = req.params
 
 	Product.findByIdAndRemove(id)
